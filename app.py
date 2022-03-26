@@ -32,7 +32,7 @@ def callback():
 
 @app.route("/hi")
 def hello():
-    return 'hi'
+    return LINE_BOT_CHANNEL_ACCESS_TOKEN
 
 
 @handler.add(MessageEvent, message=TextMessage)
