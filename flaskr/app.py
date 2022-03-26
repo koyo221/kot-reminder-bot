@@ -30,6 +30,10 @@ def callback():
 
     return 'OK'
 
+@app.route("/hi")
+def hello():
+    return 'hi'
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
