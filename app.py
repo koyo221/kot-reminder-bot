@@ -1,11 +1,10 @@
-from distutils.command.config import config
 from flask import Flask, request, abort
 
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
 
-# from .flaskr.config import *
+from config import *
 
 app = Flask(__name__)
 
