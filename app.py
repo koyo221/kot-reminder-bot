@@ -33,8 +33,8 @@ def callback():
 @app.route("/hi")
 def hello():
     # message_service = MessageService('記事')
-    work_time_repository = WorkTimeRepository("new yada", "08", "20")
-    return work_time_repository.update_worktime()
+    # work_time_repository = WorkTimeRepository("new yada", "08", "20")
+    return "works"
 
 
 @handler.add(MessageEvent, message=TextMessage)
