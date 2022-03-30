@@ -15,6 +15,7 @@ class SpreadSheet:
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": os.environ.get('client_x509_cert_url', '')
     }
+    print(client)
 
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(client, scope)
