@@ -38,15 +38,15 @@ def hello():
     message_service = MessageService('10/20aa')
     result = True
     # if (message_service.start_time and message_service.end_time):
-    if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
+    # if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
 
-        work_time_repository = WorkTimeRepository(
-            'user',
-            message_service.start_time,
-            message_service.end_time
-            )
+    #     work_time_repository = WorkTimeRepository(
+    #         'user',
+    #         message_service.start_time,
+    #         message_service.end_time
+    #         )
 
-        result = work_time_repository.update_worktime()
+    #     result = work_time_repository.update_worktime()
 
     return message_service.reply(result)
 
