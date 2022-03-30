@@ -1,3 +1,47 @@
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbK:``````(T9!``````(Wbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbW_                .Xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbWY77!          -Tppbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbVT=`                   7TWbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbb9C`                         ?Wbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbWC`                            _?Wbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbWY!                                -Tbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbR~                                    .Wbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbR!                                      (Xbbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbR!                                        ?Xbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbD             .(&ggJ.                      dbbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbbbVUU$             dMMMMMb.                      dbbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbbbWC<;;<             dMMMMM#`                       dbbbbbbbbbbbbbbbbbbbbbbbb
+# bbbWV<;;;;<             ?TMMM9!                        _Obbbbbbbbbbbbbbbbbbbbbbb
+# bbbWI;;;;;<                                    ``       (4bbbbbbbbbbbbbbbbbbbbbb
+# bbbWI;;>;;<                                  ` .          (4bbbbbbbbbbbbbbbbbbbb
+# bbbbkkoJ++<_                                ` ..`           `_TUWbbbbbbW9UY:````
+# bbbbbbbbbkmy.                                 ..                _!!!!!!!
+# bbbbbbbbbbbW&.                               ...
+# bbbbbbbbbbbbW+.                            ` ...
+# bbbbbbbbbbbbbbk+.                            ....                             ..
+# bbbbbbbbbbkbbbbkm+.                          ...._ `                          (b
+# bbbbbbbbbbbbbbbbkkkJ,                         ..... `                         (b
+# bbbbbbbbbbbbbbbbbbbbbk-...                     .....-                        (bb
+# bbbbbbbbbbbbbbbbbbbbbbbkkk&.                    .......                     (Wkb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbl                     _~.......       `  `     .(Xbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbk,                       ...............     .(Xbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbn,                         _.............._(Xbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbWn.                            ```` (((+kWbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbWn-                             .jXkbkbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbWA-                        .++Xbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbppn(.   `              .(bbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbWUUUUU3..._dkkkkWVVTTT:...(bbbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbK>~........_<ZWbf!........._?WWbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbK<............dW$............(Xbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbW&J-....~.....(dkJ._..~..~...-JXbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbp>.~...._((dWbbbR_......((JXbbbbbbbbbbbbbbbbbb
+# bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbk>...(dXWbbbbbbWk_...jmXbbkbbbbbbbbbbbbbbbbbb
+
+
+
 TimeConst = {
     "START_TIME": ['07', '08', '09', '10', '11'],
     "END_TIME": ['16', '17', '18', '19', '20'],
@@ -42,7 +86,13 @@ RESPONSE_ARTICLES = [
     "https://qiita.com/nkjm/items/38808bbc97d6927837cd",
     "https://www.yousyusyonin.com/",
     "https://qiita.com/tak001/items/f4c7ff6db862e3d283e3",
+    "https://go.aws/3n8ODWu",
+    "https://www.itmedia.co.jp/news/articles/2202/03/news133.html",
+    "https://www.itmedia.co.jp/news/articles/2201/26/news064.html",
+    "https://gigazine.net/news/20220127-ai-builds-ai/",
+
     "今日はスクリーンを見るべき日ではない",
+
 ]
 
 RESPONCE_ATTENDANCE_SPECIAL = [
@@ -55,11 +105,11 @@ RESPONCE_ATTENDANCE_SPECIAL = [
 ]
 
 RESPONCE_LEAVE_SPECIAL = [
-    "おめでとう",
+    "おめでとう 退勤です",
     "お疲れさまです",
-    "ア゛ーーーーーーーーーーーーーーーーーーーーーーー",
-    "今日だけは、今日だけは定時即帰するほかない",
-    "まだ残業できる",
+    "ア゛ーーーーーーーーーーーーーーーーーーーーーーー退勤だーーーーーーー",
+    "今日だけは定時退社するほかない",
+    "まだ残業できるのかもしれない…",
     "ブドウの花言葉: 忘却"
 ]
 
@@ -92,4 +142,8 @@ ResponseConst = {
     "RESPONSE_LEAVE_SPECIAL"     : RESPONCE_LEAVE_SPECIAL,
     "RESPONSE_OVERWORK"          : RESPONSE_OVERWORK,
     "RESPONSE_NO_MATCH"          : RESPONSE_NO_MATCH
+}
+
+ErrorConst = {
+    "GENERAL_ERROR" : "エラーが発生しました。時間をおいて再度試して下さい。"
 }

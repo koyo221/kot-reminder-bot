@@ -3,6 +3,7 @@ from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
+from repositories.WorkTimeRepository import WorkTimeRepository
 from services.MessageService import MessageService
 
 app = Flask(__name__)
@@ -31,16 +32,28 @@ def callback():
 
 @app.route("/hi")
 def hello():
-    message_service = MessageService('記事')
-    return message_service.reply()
+    # message_service = MessageService('記事')
+    work_time_repository = WorkTimeRepository("new yada", "08", "20")
+    return work_time_repository.update_worktime()
 
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message_service = MessageService(event.message.text)
+    result = True
+    if (message_service.start_time and message_service.end_time):
+
+        work_time_repository = WorkTimeRepository(
+            event.source.userId,
+            message_service.start_time,
+            message_service.end_time
+            )
+
+        result = work_time_repository.update_worktime()
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=message_service.reply())
+        TextSendMessage(text=message_service.reply(result))
     )
 
 

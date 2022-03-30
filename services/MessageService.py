@@ -12,12 +12,15 @@ class MessageService:
         self.end_time: str
 
 
-    def reply(self) -> str:
+    def reply(self, *result: bool) -> str:
         """"返信の文章を返す
 
         Returns:
             str: 返信文
         """
+        if (result == False):
+            return ErrorConst['GENERAL_ERROR']
+
         reply = self.time_matcher()
         if (reply is None):
             reply = self.msg_matcher()
