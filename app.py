@@ -35,10 +35,10 @@ def hello():
     # message_service = MessageService('記事')
     # work_time_repository = WorkTimeRepository("new yada", "08", "20")
 
-    message_service = MessageService('event.message.text')
+    message_service = MessageService('10/20aa')
     result = True
     # if (message_service.start_time and message_service.end_time):
-    if (hasattr(message_service, 'start_time') and hasattr(message_service, 'end_time')):
+    if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
 
         work_time_repository = WorkTimeRepository(
             'user',
@@ -55,7 +55,7 @@ def hello():
 def handle_message(event):
     message_service = MessageService(event.message.text)
     result = True
-    if (hasattr(message_service, 'start_time') and hasattr(message_service, 'end_time')):
+    if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
 
         work_time_repository = WorkTimeRepository(
             event.source.userId,
