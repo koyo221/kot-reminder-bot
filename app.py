@@ -34,14 +34,28 @@ def callback():
 def hello():
     # message_service = MessageService('記事')
     # work_time_repository = WorkTimeRepository("new yada", "08", "20")
-    return "works"
+
+    message_service = MessageService('event.message.text')
+    result = True
+    # if (message_service.start_time and message_service.end_time):
+    if (hasattr(message_service, 'start_time') and hasattr(message_service, 'end_time')):
+
+        work_time_repository = WorkTimeRepository(
+            'user',
+            message_service.start_time,
+            message_service.end_time
+            )
+
+        result = work_time_repository.update_worktime()
+
+    return message_service.reply(result)
 
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message_service = MessageService(event.message.text)
     result = True
-    if (message_service.start_time and message_service.end_time):
+    if (hasattr(message_service, 'start_time') and hasattr(message_service, 'end_time')):
 
         work_time_repository = WorkTimeRepository(
             event.source.userId,
