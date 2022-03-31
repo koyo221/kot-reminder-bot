@@ -23,14 +23,14 @@ if (weekday not in [5, 6]):
         # start_time
         if (row[1] == hour):
             try:
-                print(row[0])
+                print(message_service.send_start())
                 line_bot_api.push_message(row[0], TextSendMessage(text=message_service.send_start()))
             except:
                 print(f"batch failed for user {row[0]}")
         # end_time
         if (row[2] == hour):
             try:
-                print(row[0])
+                print(message_service.send_end())
                 line_bot_api.push_message(row[0], TextSendMessage(text=message_service.send_end()))
             except:
                 print(f"batch failed for user {row[0]}")
