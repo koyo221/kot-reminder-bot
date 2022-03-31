@@ -8,9 +8,12 @@ from services.MessageService import MessageService
 
 app = Flask(__name__)
 
+# TODO 接続をクラス化する
+
 line_bot_api = LineBotApi(os.environ.get('LINE_BOT_CHANNEL_ACCESS_TOKEN', 'test'))
 handler = WebhookHandler(os.environ.get('LINE_BOT_CHANNEL_SECRET', 'test'))
 
+# TODO コントローラーに処理を移す
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -30,34 +33,22 @@ def callback():
 
     return 'OK'
 
+# test
 @app.route("/hi")
 def hello():
-    # message_service = MessageService('記事')
-    # work_time_repository = WorkTimeRepository("new yada", "08", "20")
 
     message_service = MessageService('10/20aa')
     result = True
-    # if (message_service.start_time and message_service.end_time):
-    # if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
-
-    #     work_time_repository = WorkTimeRepository(
-    #         'user',
-    #         message_service.start_time,
-    #         message_service.end_time
-    #         )
-
-    #     result = work_time_repository.update_worktime()
 
     return message_service.reply(result)
 
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    # TODO MessageServiceがそのままWorkTimeRepoを呼んでもいいけど、望ましいのはMessageServiceがMessageMatcherService(ない)とWorkTimeRepoを呼ぶことかと思う
     message_service = MessageService(event.message.text)
     result = True
     if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
-
-        print(event.source)
 
         work_time_repository = WorkTimeRepository(
             event.source.user_id,

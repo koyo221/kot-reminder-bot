@@ -17,18 +17,9 @@ class SpreadSheet:
     }
     client["private_key"] = client["private_key"].replace("\\n", "\n")
 
+    # ローカル用の処理を整備する（いまはcredsを切り変える）
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(client, scope)
     # credentials = ServiceAccountCredentials.from_json_keyfile_name('./client_secret.json', scope)
     gs = gspread.authorize(credentials)
     sheets = gs.open("kot_reminder_bot")
-
-# list_of_hashes = sheet.get("A1")
-# print(list_of_hashes)
-# scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-# credentials = ServiceAccountCredentials.from_json_keyfile_name('../client_secret.json', scope)
-# gs = gspread.authorize(credentials)
-
-# sheet = gs.open("kot_reminder_bot").sheet1
-# list_of_hashes = sheet.get("A1")
-# print(list_of_hashes)
