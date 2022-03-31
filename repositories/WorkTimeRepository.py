@@ -8,20 +8,8 @@ class WorkTimeRepository(SpreadSheet):
         self.start_time = start_time
         self.end_time = end_time
 
-
-    # def test(self):
-    #     value = [self.user_id, self.start_time, self.end_time]
-    #     body = {
-    #         "user_id": self.user_id,
-    #         "start_time": self.start_time,
-    #         "end_time": self.end_time
-    #     }
-    #     res = super().sheets.sheet1.append_row(value)
-    #     return res
-
-    # def find(self):
-    #     res = super().sheets.sheet1.find('abcdefghijk1').row
-    #     return res
+    def get_all(self):
+        return super().sheets.sheet1.get()
 
     def find_matching_id(self):
         return super().sheets.sheet1.find(self.user_id)
