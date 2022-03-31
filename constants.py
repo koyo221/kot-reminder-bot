@@ -41,7 +41,7 @@
 # bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbk>...(dXWbbbbbbWk_...jmXbbkbbbbbbbbbbbbbbbbbb
 
 
-
+# TODO いらない処理なので消す
 TimeConst = {
     "START_TIME": ['07', '08', '09', '10', '11'],
     "END_TIME": ['16', '17', '18', '19', '20'],

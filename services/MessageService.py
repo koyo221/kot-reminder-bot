@@ -63,6 +63,18 @@ class MessageService:
     def somehow_debugging(self):
         return (re.fullmatch(r'\D\D/\D\D', self.message))
 
+    def send_start(self):
+        if (self.message_includes_words_from_list(RequestConst["REQUEST_ATTENDANCE"])):
+            if (self.utilityService.slot_true_chance(0.9)):
+                return f"{ResponseConst['RESPONSE_ATTENDANCE']}{ResponseConst['KOT_URL']}"
+            return f"{random.choice(ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])}{ResponseConst['KOT_URL']}"
+
+    def send_end(self):
+        if (self.message_includes_words_from_list(RequestConst["REQUEST_LEAVE"])):
+            if (self.utilityService.slot_true_chance(0.9)):
+                return f"{ResponseConst['RESPONSE_LEAVE']}{ResponseConst['KOT_URL']}"
+            return f"{random.choice(ResponseConst['RESPONSE_LEAVE_SPECIAL'])}{ResponseConst['KOT_URL']}"
+
 
     # TODO: constantsの持ち方を変えてループで処理できるように修正する
     def msg_matcher(self)-> str:
@@ -75,15 +87,9 @@ class MessageService:
         if (self.message_includes_words_from_list(RequestConst["REQUEST_ARTICLES"])):
             return random.choice(ResponseConst["RESPONSE_ARTICLES"])
 
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_ATTENDANCE"])):
-            if (self.utilityService.slot_true_chance(0.9)):
-                return f"{ResponseConst['RESPONSE_ATTENDANCE']}{ResponseConst['KOT_URL']}"
-            return f"{random.choice(ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])}{ResponseConst['KOT_URL']}"
+        self.send_start()
 
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_LEAVE"])):
-            if (self.utilityService.slot_true_chance(0.9)):
-                return f"{ResponseConst['RESPONSE_LEAVE']}{ResponseConst['KOT_URL']}"
-            return f"{random.choice(ResponseConst['RESPONSE_LEAVE_SPECIAL'])}{ResponseConst['KOT_URL']}"
+        self.send_end()
 
         if (self.message_includes_words_from_list(RequestConst["REQUEST_OVERWORK"])):
             return random.choice(ResponseConst["RESPONSE_OVERWORK"])

@@ -16,7 +16,6 @@ class SpreadSheet:
         "client_x509_cert_url": os.environ.get('CLIENT_X509_CERT_URL', '')
     }
     client["private_key"] = client["private_key"].replace("\\n", "\n")
-    print(client)
 
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(client, scope)
