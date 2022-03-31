@@ -57,8 +57,10 @@ def handle_message(event):
     result = True
     if (message_service.message_includes_worktime() and message_service.is_valid_worktime()):
 
+        print(event.source)
+
         work_time_repository = WorkTimeRepository(
-            event.source.userId,
+            event.source.user,
             message_service.start_time,
             message_service.end_time
             )
