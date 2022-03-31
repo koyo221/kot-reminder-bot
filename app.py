@@ -60,7 +60,7 @@ def handle_message(event):
         print(event.source)
 
         work_time_repository = WorkTimeRepository(
-            event.source["userId"],
+            event["source"]["user_id"],
             message_service.start_time,
             message_service.end_time
             )
