@@ -41,17 +41,11 @@
 # bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbk>...(dXWbbbbbbWk_...jmXbbkbbbbbbbbbbbbbbbbbb
 
 
-# TODO いらない処理なので消す
-TimeConst = {
-    "START_TIME": ['07', '08', '09', '10', '11'],
-    "END_TIME": ['16', '17', '18', '19', '20'],
-}
-
 WorkTimeResponses = {
     "WORK_TIME_VALID1" : "開始時刻: ",
     "WORK_TIME_VALID2" : "終了時刻: ",
     "WORK_TIME_VALID3" : "で設定されました。",
-    "WORK_TIME_INVALID": "不正な入力時刻です。\n始業時刻は07~11, 就業時刻は16~20が使用できます。",
+    'WORK_TIME_INVALID': "不正な入力時刻です。",
     "DEBUGGING"        : "NameError: name 'debugging_user' is not defined. Close this application immediately."
 }
 
@@ -139,22 +133,22 @@ RESPONSE_OVERWORK = [
 
 RequestConst = {
     "REQUEST_ARTICLES"  : ["article", "記事", "きじ", "暇", "ひま", "ヒマ"],
-    "REQUEST_ATTENDANCE": ["出勤", "始業", "しぎょ"],
+    'REQUEST_ATTENDANCE': ["出勤", "始業", "しぎょ"],
     "REQUEST_LEAVE"     : ["退勤", "終業", "しゅう"],
     "REQUEST_OVERWORK"  : ["残業", "ざん"]
 }
 
 ResponseConst = {
-    "RESPONSE_ARTICLES"          : RESPONSE_ARTICLES,
+    'RESPONSE_ARTICLES'          : RESPONSE_ARTICLES,
     "KOT_URL"                    : "\nhttps://s2.kingtime.jp/independent/recorder2/personal/",
-    "RESPONSE_ATTENDANCE"        : "出勤申請を行ってください。",
-    "RESPONSE_LEAVE"             : "退勤申請を行ってください。",
-    "RESPONSE_ATTENDANCE_SPECIAL": RESPONCE_ATTENDANCE_SPECIAL,
-    "RESPONSE_LEAVE_SPECIAL"     : RESPONCE_LEAVE_SPECIAL,
-    "RESPONSE_OVERWORK"          : RESPONSE_OVERWORK,
-    "RESPONSE_NO_MATCH"          : RESPONSE_NO_MATCH
+    'RESPONSE_ATTENDANCE'        : "出勤申請を行ってください。",
+    'RESPONSE_LEAVE'             : "退勤申請を行ってください。",
+    'RESPONSE_ATTENDANCE_SPECIAL': RESPONCE_ATTENDANCE_SPECIAL,
+    'RESPONSE_LEAVE_SPECIAL'     : RESPONCE_LEAVE_SPECIAL,
+    'RESPONSE_OVERWORK'          : RESPONSE_OVERWORK,
+    'RESPONSE_NO_MATCH'          : RESPONSE_NO_MATCH
 }
 
 ErrorConst = {
-    "GENERAL_ERROR" : "エラーが発生しました。時間をおいて再度試して下さい。"
+    'GENERAL_ERROR' : "エラーが発生しました。時間をおいて再度試して下さい。"
 }

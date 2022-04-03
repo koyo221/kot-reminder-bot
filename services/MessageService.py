@@ -1,104 +1,122 @@
-import re, random
-from typing import Union
-from .UtilityService import UtilityService
+import random
+from typing import Literal, Union
+
 from constants import *
+
+from .MatcherService import MatcherService
+from .UtilityService import UtilityService
+
 
 class MessageService:
 
+
     def __init__(self, message: str):
-        self.utilityService = UtilityService()
         self.message = message
-        self.start_time: str
-        self.end_time: str
+        self.utility_service = UtilityService()
+        self.matcher_service = MatcherService(self.message)
 
 
-    def reply(self, *result: bool) -> str:
-        """"返信の文章を返す
-
-        Returns:
-            str: 返信文
-        """
-        if (result == False):
-            return ErrorConst['GENERAL_ERROR']
-
-        reply = self.time_matcher()
-        if (reply is None):
-            reply = self.msg_matcher()
-        return reply
-
-
-    def time_matcher(self) -> Union[str, None]:
-        """時刻設定を行う
+    def reply(self) -> str:
+        """messageの内容に応じて返答する
 
         Returns:
-            Union[str, None]: 時刻設定完了メッセージ、None
+            str: レスポンスメッセージ
         """
-        if (self.message_includes_worktime()):
-            if (self.is_valid_worktime()):
-                return f"{WorkTimeResponses['WORK_TIME_VALID1']}{self.start_time}:00\n{WorkTimeResponses['WORK_TIME_VALID2']}{self.end_time}:00\n{WorkTimeResponses['WORK_TIME_VALID3']}"
+        #NOTE こんな型ってあっていいの？そもそもの設計がだめかもね
+        result: Union[str, list[str], bool]
+
+        result = self.matcher_service.is_valid_worktime()
+        if (result):
+            return self.handle_worktime(result)
+
+        result = self.matcher_service.is_debugging()
+        if (result):
+            return self.handle_debugging()
+
+        result = self.matcher_service.match(RequestConst)
+        if (result):
+            return self.handle_match(result)
+
+        return ErrorConst['GENERAL_ERROR']
+
+
+    def handle_worktime(self, result: Union[Literal['invalid'], list[str]])->str:
+        """勤務時間を受け取った時、対応するメッセージを返す
+
+        Args:
+            result (Union[Literal[&#39;invalid&#39;], list[str]]): is_valid_worktimeの()返り値
+
+        Returns:
+            str: レスポンスメッセージ
+        """
+        if result == 'invalid':
             return WorkTimeResponses['WORK_TIME_INVALID']
 
-        elif (self.somehow_debugging()):
-            return WorkTimeResponses['DEBUGGING']
-        return
+        return f"{WorkTimeResponses['WORK_TIME_VALID1']}\
+            {result[0]}:00\n{WorkTimeResponses['WORK_TIME_VALID2']}\
+            {result[1]}:00\n{WorkTimeResponses['WORK_TIME_VALID3']}"
 
 
-    def message_includes_worktime(self):
-        return (re.fullmatch(r'\d\d/\d\d', self.message))
+    def is_valid_worktime(self, list: list[str])->bool:
+        """妥当な勤務時間か
 
-
-    def is_valid_worktime(self) -> bool:
-        """設定可能な時刻であるかどうか判定する
-
-        Note: self.start_time, self.end_timeを他のメソッドで再代入しない
+        Args:
+            list (list[str]): 始業/終業
 
         Returns:
-            bool: 設定可能である
+            bool: 妥当である
         """
-        self.start_time = self.message[:2]
-        self.end_time = self.message[3:]
-        return self.start_time in TimeConst["START_TIME"] and self.end_time in TimeConst["END_TIME"]
+        return int(list[0]) >= int(list[1])
 
 
-    def somehow_debugging(self):
-        return (re.fullmatch(r'\D\D/\D\D', self.message))
-
-    def send_start(self):
-        if (self.utilityService.slot_true_chance(0.9)):
-            return f"{ResponseConst['RESPONSE_ATTENDANCE']}{ResponseConst['KOT_URL']}"
-        return f"{random.choice(ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])}{ResponseConst['KOT_URL']}"
-
-    def send_end(self):
-        if (self.utilityService.slot_true_chance(0.9)):
-            return f"{ResponseConst['RESPONSE_LEAVE']}{ResponseConst['KOT_URL']}"
-        return f"{random.choice(ResponseConst['RESPONSE_LEAVE_SPECIAL'])}{ResponseConst['KOT_URL']}"
-
-
-    # TODO: constantsの持ち方を変えてループで処理できるように修正する
-    def msg_matcher(self)-> str:
-        """RequestConstに沿ってメッセージを解釈する
+    def handle_debugging(self)->str:
+        """デバッグメッセージを受け取ったとき、対応するメッセージを返す
 
         Returns:
-            str: 返信
+            str: レスポンスメッセージ
         """
-
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_ARTICLES"])):
-            return random.choice(ResponseConst["RESPONSE_ARTICLES"])
-
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_ATTENDANCE"])):
-            self.send_start()
-
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_LEAVE"])):
-            self.send_end()
-
-        if (self.message_includes_words_from_list(RequestConst["REQUEST_OVERWORK"])):
-            return random.choice(ResponseConst["RESPONSE_OVERWORK"])
-
-        return random.choice(ResponseConst["RESPONSE_NO_MATCH"])
+        return WorkTimeResponses['DEBUGGING']
 
 
-    def message_includes_words_from_list(self, list: list[str]) -> bool:
-        for str in list:
-            if (str in self.message):
-                return True
-        return False
+    def handle_match(self, key: str)->str:
+        """keyを受け取ったとき、対応するメッセージを返す
+
+        Args:
+            key (str): RequestConstのキー
+
+        Returns:
+            str: レスポンスメッセージ
+        """
+        print(key)
+        if key == 'REQUEST_ARTICLES':
+            return random.choice(ResponseConst['RESPONSE_ARTICLES'])
+
+        if key == 'REQUEST_ATTENDANCE':
+            return self.is_special(
+                ResponseConst['RESPONSE_ATTENDANCE'],
+                ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])
+
+        if key == 'REQUEST_LEAVE':
+            return self.is_special(
+                ResponseConst['RESPONSE_LEAVE'],
+                ResponseConst['RESPONSE_LEAVE_SPECIAL'])
+
+        if key == 'REQUEST_OVERWORK':
+            return random.choice(ResponseConst['RESPONSE_OVERWORK'])
+
+        return random.choice(ResponseConst['RESPONSE_NO_MATCH'])
+
+
+    def is_special(self, normal: str, special: list[str])->str:
+        """10%の確率で特別なメッセージを返す
+
+        Args:
+            normal (str): 通常時のメッセージ
+            special (list[str]): 特別なメッセージのリスト
+
+        Returns:
+            str: レスポンスメッセージ
+        """
+        if self.utility_service.slot_true_chance(0.1):
+            return f"{random.choice(special)}{ResponseConst['KOT_URL']}"
+        return f"{normal}{ResponseConst['KOT_URL']}"
