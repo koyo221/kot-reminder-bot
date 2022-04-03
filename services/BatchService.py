@@ -20,8 +20,8 @@ class BatchService:
 
     #TODO リファクタリングの余地あり
     def exec_batch(self):
-        # if not self.util_service.is_weekday():
-        #     return
+        if not self.util_service.is_weekday():
+            return
 
         sheet = self.sheet_service.get_all()
         hour = self.util_service.get_hour()
