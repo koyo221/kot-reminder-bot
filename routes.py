@@ -60,19 +60,4 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    input_text = '11/12'
-    message_service = MessageService(input_text)
-    matcher_service = MatcherService(input_text)
-
-    reply = message_service.reply()
-
-    #TODO かなりいまいちな処理, どうするのが適切かは謎
-    work_time = matcher_service.is_valid_worktime()
-    if type(work_time) is list:
-        work_time_repo = WorkTimeRepository('testuser', work_time)
-        try:
-            work_time_repo.update_worktime()
-        except:
-            reply = ErrorConst['GENERAL_ERROR']
-
-    return reply
+    return 'hi'
