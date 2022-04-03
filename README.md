@@ -2,7 +2,7 @@
 ## QR
 ![kot_reminder](https://user-images.githubusercontent.com/88639614/161070237-ac33286c-c60c-4e48-9c4e-0737f302b523.png)
 ## 概要
-出勤/退勤時刻になったらリマインドしてくれるひよこのLineBotです。<br>
+出勤/退勤時刻になったらリマインドしてくれるひよこのLINE Botです。<br>
 こんな人におすすめ→毎月タイムカードを切るのを忘れまくっている
 ## 使い方
 1. 上のQRからLINEで友達登録をしてください。
