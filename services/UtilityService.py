@@ -29,7 +29,11 @@ class UtilityService:
 
     def get_hour(self) -> str:
         dt = self.get_date()
-        return str(dt.hour)
+        hour = str(dt.hour)
+        if len(hour) == 1:
+            hour = f"0{hour}"
+        return hour
+
 
     def get_date(self):
         return datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
