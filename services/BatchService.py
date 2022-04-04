@@ -39,8 +39,8 @@ class BatchService:
             if row[2] == hour:
                 try:
                     push = self.message_service.is_special(
-                        ResponseConst['RESPONSE_ATTENDANCE'],
-                        ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])
+                        ResponseConst['RESPONSE_LEAVE'],
+                        ResponseConst['RESPONSE_LEAVE_SPECIAL'])
                     LineService.line_bot_api.push_message(row[0], TextSendMessage(text=push))
                 except:
                     print(f"batch failed for user {row[0]}")
