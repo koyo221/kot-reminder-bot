@@ -20,7 +20,9 @@ class TestMatcherService(unittest.TestCase):
             ['aaaa', False],
             ['aa/aa', False],
             ['12/a1', False],
-            ['00/00', 'invalid']
+            ['00/00', 'invalid'],
+            ['99/22', 'invalid'],
+            ['30/50', 'invalid']
         ]
 
         for case in test_msg:

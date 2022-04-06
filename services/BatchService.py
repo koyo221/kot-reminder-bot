@@ -24,10 +24,10 @@ class BatchService:
             return
 
         sheet = self.sheet_service.get_all()
-        hour = self.util_service.get_hour()
+        dt = self.util_service.get_date()
 
         for row in sheet:
-            if row[1] == hour:
+            if self.util_service.is_ten_minutes_before(dt, row[1]):
                 try:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_ATTENDANCE'],
@@ -36,7 +36,7 @@ class BatchService:
                     LineService.line_bot_api.push_message(row[0], TextSendMessage(text=push))
                 except:
                     print(f"batch failed for user {row[0]}")
-            if row[2] == hour:
+            if self.util_service.is_ten_minutes_after(dt, row[2]):
                 try:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_LEAVE'],

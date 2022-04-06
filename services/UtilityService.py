@@ -26,14 +26,51 @@ class UtilityService:
         dt = self.get_date()
         return dt.weekday() not in [5, 6]
 
+    def is_ten_minutes_before(self, dt: datetime.datetime, sheet_hour: str) -> bool:
+        """出勤時刻の10分前かどうか
 
-    def get_hour(self) -> str:
-        dt = self.get_date()
-        hour = str(dt.hour)
-        if len(hour) == 1:
-            hour = f"0{hour}"
-        return hour
+        Args:
+            dt (datetime.datetime): 現在時刻
+            sheet_hour (str): Spread Sheetから取得した出勤時刻
 
+        Returns:
+            bool: 10分前である
+        """
+        target_hour = int(sheet_hour) - 1 if int(sheet_hour) - 1 != -1 else 23
+        is_fifty = 50 <= dt.minute < 60
+        return is_fifty and target_hour == dt.hour
+
+    def is_ten_minutes_after(self, dt: datetime.datetime, sheet_hour: str) -> bool:
+        """退勤時刻の10分後かどうか
+
+        Args:
+            dt (datetime.datetime): 現在時刻
+            sheet_hour (str): Spread Sheetから取得した退勤時刻
+
+        Returns:
+            bool: 10分後である
+        """
+        target_hour = int(sheet_hour)
+        is_tenth = 10 <= dt.minute < 20
+        return is_tenth and target_hour == dt.hour
+
+    #TODO どう考えてももっとマシな書き方があるので、わかったら直す（バグが起きにくいからいいけどね）
+    def is_valid_time(self, time: str) -> bool:
+        """妥当な時間かどうか
+
+        Args:
+            time (str): 入力時刻
+
+        Returns:
+            bool: 妥当である
+        """
+        valid_time = [
+            '00', '01', '02', '03', '04', '05',
+            '06', '07', '08', '09', '10', '11',
+            '12', '13', '14', '15', '16', '17',
+            '18', '19', '20', '21', '22', '23',
+        ]
+        return time in valid_time
 
     def get_date(self):
         return datetime.datetime.now(pytz.timezone('Asia/Tokyo'))

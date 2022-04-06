@@ -1,6 +1,6 @@
 import re
 from typing import Literal, Union
-
+from .UtilityService import UtilityService
 
 class MatcherService:
     """文字列のマッチ処理を扱う
@@ -9,6 +9,7 @@ class MatcherService:
 
     def __init__(self, message: str):
         self.message = message
+        self.util_service = UtilityService()
 
 
     def is_valid_worktime(self) -> Union[list[str], Literal['invalid', False]]:
@@ -21,6 +22,8 @@ class MatcherService:
             start = self.message[:2]
             end = self.message[3:]
             if start >= end:
+                return 'invalid'
+            if not (self.util_service.is_valid_time(start) and self.util_service.is_valid_time(end)):
                 return 'invalid'
             return [start, end]
         return False
