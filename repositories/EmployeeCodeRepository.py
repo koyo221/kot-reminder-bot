@@ -1,3 +1,4 @@
+from services.LineService import LineService
 from .SpreadSheetService import SpreadSheetService
 
 
@@ -8,6 +9,7 @@ class EmployeeCodeRepository:
         self.id = id
         self.ec = ec
         self.sheet_service = SpreadSheetService()
+        self.line_service = LineService()
 
 
     def register_ec(self):
@@ -26,9 +28,12 @@ class EmployeeCodeRepository:
 
 
     def add_ec_existing_user(self, cell):
+        display_name = self.line_service.get_display_name(self.id)
         self.sheet_service.update_cell(cell.row, cell.col + 3, self.ec)
+        self.sheet_service.update_cell(cell.row, cell.col + 5, display_name)
 
 
     def add_ec_not_existing_user(self):
-        value = [self.id, None, None, self.ec]
+        display_name = self.line_service.get_display_name(self.id)
+        value = [self.id, None, None, self.ec, None, display_name]
         self.sheet_service.append_row(value)
