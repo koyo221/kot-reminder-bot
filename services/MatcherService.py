@@ -2,6 +2,7 @@ import re
 from typing import Literal, Union
 from .UtilityService import UtilityService
 
+
 class MatcherService:
     """文字列のマッチ処理を扱う
     """
@@ -52,3 +53,9 @@ class MatcherService:
             if self.message in list:
                 return key
         return 'no_match'
+
+
+    def is_employee_code(self):
+        if not re.fullmatch(r'従業員番号\d\d\d\d', self.message):
+            return False
+        return self.message[5:]

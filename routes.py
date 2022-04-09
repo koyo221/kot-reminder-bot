@@ -4,9 +4,11 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from app import app
 from repositories.WorkTimeRepository import WorkTimeRepository
+from repositories.EmployeeCodeRepository import EmployeeCodeRepository
 from services.LineService import LineService
 from services.MessageService import MessageService
 from services.MatcherService import MatcherService
+
 from constants import *
 
 #NOTE 処理をここにそのまま書くのってかなり変だけど、@handler.add周辺の処理が謎だしルートも実質1つなので一旦このままにする(Controllerクラスを作成するほどでもない)
@@ -42,6 +44,7 @@ def handle_message(event):
     reply = message_service.reply()
 
     #TODO かなりいまいちな処理, どうするのが適切かは謎
+    # どこかでリプライの種類を保持するようにすればいいのかも
     work_time = matcher_service.is_valid_worktime()
     if type(work_time) is list:
         work_time_repo = WorkTimeRepository(event.source.user_id, work_time)
@@ -50,6 +53,15 @@ def handle_message(event):
             work_time_repo.update_worktime()
         except:
             reply = ErrorConst['GENERAL_ERROR']
+
+    employee_code = matcher_service.is_employee_code()
+    if employee_code:
+        ec_service = EmployeeCodeRepository(event.source.user_id, employee_code)
+        try:
+            ec_service.register_ec()
+        except:
+            reply = ErrorConst['GENERAL_ERROR']
+
 
     line_bot_api.reply_message(
         event.reply_token,

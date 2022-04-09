@@ -49,6 +49,11 @@ WorkTimeResponses = {
     "DEBUGGING"        : "NameError: name 'debugging_user' is not defined. Close this application immediately."
 }
 
+EmployeeCodeResponses = {
+    'EMPLOYEE_CODE': '従業員番号: ',
+    'REGISTERED': 'で登録しました。\nSlackで管理者にも従業員番号を通知してください。',
+}
+
 RESPONSE_ARTICLES = [
     "https://qiita.com/TakahikoKawasaki/items/e37caf50776e00e733be",
     "https://qiita.com/uhyo/items/e2fdef2d3236b9bfe74a",

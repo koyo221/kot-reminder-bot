@@ -29,3 +29,12 @@ class SpreadSheetService:
 
     def find(self, str):
         return SpreadSheetService.sheets.sheet1.find(str)
+
+    def get_cell(self, row, col):
+        return SpreadSheetService.sheets.sheet1.cell(row, col)
+
+    def update_cell(self, row, col, val):
+        SpreadSheetService.sheets.sheet1.update_cell(row, col, val)
+
+    def append_row(self, value):
+        SpreadSheetService.sheets.sheet1.append_row(value)

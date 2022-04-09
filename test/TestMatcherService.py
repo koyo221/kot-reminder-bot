@@ -49,6 +49,22 @@ class TestMatcherService(unittest.TestCase):
                 RequestConst)
             self.assertEqual(case[1], res)
 
+    def test_is_employee_code(self):
+        test = [
+            ['aaaaa', False],
+            ['従業員番号0000', '0000'],
+            ['従業員番号000', False],
+            ['従業員番号00000', False],
+            ['0000', False],
+            ['従業員0000', False],
+            ['従業員番号1234', '1234'],
+            ['基本的人権9999', False]
+        ]
+
+        for case in test:
+            ms = MatcherService(case[0])
+            self.assertEqual(ms.is_employee_code(), case[1])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -26,7 +26,9 @@ class BatchService:
         sheet = self.sheet_service.get_all()
         dt = self.util_service.get_date()
 
-        for row in sheet:
+        for i, row in enumerate(sheet):
+            if (i == 0):
+                continue
             if self.util_service.is_ten_minutes_before(dt, row[1]):
                 try:
                     push = self.message_service.is_special(

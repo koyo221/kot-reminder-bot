@@ -25,6 +25,10 @@ class MessageService:
         #NOTE こんな型ってあっていいの？そもそもの設計がだめかもね
         result: Union[str, list[str], bool]
 
+        result = self.matcher_service.is_employee_code()
+        if result:
+            return self.handle_employee_code(result)
+
         result = self.matcher_service.is_valid_worktime()
         if (result):
             return self.handle_worktime(result)
@@ -44,7 +48,7 @@ class MessageService:
         """勤務時間を受け取った時、対応するメッセージを返す
 
         Args:
-            result (Union[Literal[&#39;invalid&#39;], list[str]]): is_valid_worktimeの()返り値
+            result (Union[Literal['invalid'], list[str]]): is_valid_worktime()の返り値
 
         Returns:
             str: レスポンスメッセージ
@@ -120,3 +124,6 @@ class MessageService:
         if self.utility_service.slot_true_chance(0.1):
             return f"{random.choice(special)}{ResponseConst['KOT_URL']}"
         return f"{normal}{ResponseConst['KOT_URL']}"
+
+    def handle_employee_code(self, employee_code):
+        return f"{EmployeeCodeResponses['EMPLOYEE_CODE']}{employee_code}{EmployeeCodeResponses['REGISTERED']}"
