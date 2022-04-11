@@ -117,6 +117,12 @@ RESPONCE_LEAVE_SPECIAL = [
     "お疲れ様だなんて言ってあげないんだからねッ",
 ]
 
+RESPONSE_STAMPING = [
+    '打刻や〜',
+    '打刻のオタク',
+    '打刻ぴよ',
+]
+
 RESPONSE_NO_MATCH = [
     "←何も分かっていないひよこ",
     "もしバグを発見したら、開発者までご連絡ください。",
@@ -138,16 +144,19 @@ RequestConst = {
     "REQUEST_ARTICLES"  : ["article", "記事", "きじ", "暇", "ひま", "ヒマ"],
     'REQUEST_ATTENDANCE': ["出勤", "始業", "しぎょ"],
     "REQUEST_LEAVE"     : ["退勤", "終業", "しゅう"],
-    "REQUEST_OVERWORK"  : ["残業", "ざん"]
+    "REQUEST_OVERWORK"  : ["残業", "ざん"],
+    'REQUEST_STAMPING'  : ['打刻', 'だこ']
 }
 
 ResponseConst = {
     'RESPONSE_ARTICLES'          : RESPONSE_ARTICLES,
     "KOT_URL"                    : "\nhttps://s2.kingtime.jp/independent/recorder2/personal/",
     'RESPONSE_ATTENDANCE'        : "出勤申請を行ってください。",
-    'RESPONSE_LEAVE'             : "退勤申請を行ってください。",
     'RESPONSE_ATTENDANCE_SPECIAL': RESPONCE_ATTENDANCE_SPECIAL,
+    'RESPONSE_LEAVE'             : "退勤申請を行ってください。",
     'RESPONSE_LEAVE_SPECIAL'     : RESPONCE_LEAVE_SPECIAL,
+    'RESPONSE_STAMPING'          : '打刻を行いました。',
+    'RESPONSE_STAMPING_SPECIAL'  : RESPONSE_STAMPING,
     'RESPONSE_OVERWORK'          : RESPONSE_OVERWORK,
     'RESPONSE_NO_MATCH'          : RESPONSE_NO_MATCH
 }

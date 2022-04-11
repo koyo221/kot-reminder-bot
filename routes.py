@@ -62,6 +62,13 @@ def handle_message(event):
         except:
             reply = ErrorConst['GENERAL_ERROR']
 
+    stamping = matcher_service.match(RequestConst)
+    if stamping == 'REQUEST_STAMPING':
+        try:
+            pass
+        except:
+            reply = ErrorConst['GENERAL_ERROR']
+
 
     line_bot_api.reply_message(
         event.reply_token,

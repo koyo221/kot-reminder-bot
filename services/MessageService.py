@@ -108,6 +108,11 @@ class MessageService:
         if key == 'REQUEST_OVERWORK':
             return random.choice(ResponseConst['RESPONSE_OVERWORK'])
 
+        if key == 'REQUEST_STAMPING':
+            return self.is_special(
+                ResponseConst['RESPONSE_STAMPING'],
+                ResponseConst['RESPONSE_STAMPING_SPECIAL'])
+
         return random.choice(ResponseConst['RESPONSE_NO_MATCH'])
 
 
