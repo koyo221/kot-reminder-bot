@@ -74,3 +74,7 @@ class UtilityService:
 
     def get_date(self):
         return datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+
+
+    def get_kot_time(self, dt: datetime.datetime):
+        return dt.isoformat()
