@@ -86,5 +86,20 @@ class TestUtilityService(unittest.TestCase):
             us = UtilityService()
             self.assertEqual(us.is_valid_time(case[0]), case[1])
 
+
+    def test_is_first_batch(self):
+        test = [
+            [datetime.datetime.strptime('2022/01/01/10/50', '%Y/%m/%d/%H/%M'), False],
+            [datetime.datetime.strptime('2022/01/01/00/20', '%Y/%m/%d/%H/%M'), False],
+            [datetime.datetime.strptime('2022/01/01/00/00', '%Y/%m/%d/%H/%M'), True],
+            [datetime.datetime.strptime('2022/01/01/00/09', '%Y/%m/%d/%H/%M'), True],
+            [datetime.datetime.strptime('2022/01/01/00/10', '%Y/%m/%d/%H/%M'), False],
+            [datetime.datetime.strptime('2022/01/01/23/59', '%Y/%m/%d/%H/%M'), False],
+        ]
+
+        for case in test:
+            us = UtilityService()
+            self.assertEqual(us.is_first_batch(case[0]), case[1])
+
 if __name__ == "__main__":
     unittest.main()

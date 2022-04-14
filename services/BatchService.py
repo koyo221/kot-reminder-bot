@@ -20,11 +20,15 @@ class BatchService:
 
     #TODO リファクタリングの余地あり
     def exec_batch(self):
+        dt = self.util_service.get_date()
+
+        if self.util_service.is_first_batch(dt):
+            self.sheet_service.reset_stamping_count()
+
         if not self.util_service.is_weekday():
             return
 
         sheet = self.sheet_service.get_all()
-        dt = self.util_service.get_date()
 
         for i, row in enumerate(sheet):
             if (i == 0):

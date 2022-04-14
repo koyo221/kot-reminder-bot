@@ -72,6 +72,19 @@ class UtilityService:
         ]
         return time in valid_time
 
+
+    def is_first_batch(self, dt: datetime.datetime) ->bool:
+        """バッチの初回実行かどうか
+
+        Args:
+            dt (datetime.datetime): 時刻
+
+        Returns:
+            bool: 初回である
+        """
+        return (dt.hour == 0) and (00 <= dt.minute < 10)
+
+
     def get_date(self):
         return datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 
