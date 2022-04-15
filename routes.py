@@ -83,6 +83,7 @@ def handle_message(event):
 @app.route("/hi")
 def hello():
     btm = TemplateSendMessage(
+        alt_text='alt',
         template=ButtonsTemplate(
             text='打刻催促テスト',
             title='Menu',
