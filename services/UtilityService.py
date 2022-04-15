@@ -89,5 +89,9 @@ class UtilityService:
         return datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 
 
+    def get_kot_date(self, dt: datetime.datetime):
+        return dt.strftime('%Y-%m-%d')
+
+
     def get_kot_time(self, dt: datetime.datetime):
-        return dt.isoformat()
+        return f'{dt.isoformat()}+09:00'

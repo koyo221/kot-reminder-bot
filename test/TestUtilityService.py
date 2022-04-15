@@ -12,18 +12,6 @@ class TestUtilityService(unittest.TestCase):
     def setUp(self):
         pass
 
-    # 要削除
-    def test_get_hour(self):
-        hour_list = [
-            ['1', '01'],
-            ['2', '02'],
-            ['11', '11']
-            ]
-        for hour in hour_list:
-            ans = hour[0]
-            if len(hour[0]) == 1:
-                ans = f"0{hour[0]}"
-            self.assertEqual(ans, hour[1])
 
     def test_is_ten_minutes_before(self):
         test = [
@@ -48,6 +36,7 @@ class TestUtilityService(unittest.TestCase):
             us = UtilityService()
             self.assertEqual(us.is_ten_minutes_before(case[0], case[1]), case[2])
 
+
     def test_is_ten_minutes_after(self):
         test = [
             [datetime.datetime.strptime('2022/01/01/10/50', '%Y/%m/%d/%H/%M'), '11', False],
@@ -71,6 +60,7 @@ class TestUtilityService(unittest.TestCase):
         for case in test:
             us = UtilityService()
             self.assertEqual(us.is_ten_minutes_after(case[0], case[1]), case[2])
+
 
     def test_is_valid_time(self):
         test = [
@@ -100,6 +90,29 @@ class TestUtilityService(unittest.TestCase):
         for case in test:
             us = UtilityService()
             self.assertEqual(us.is_first_batch(case[0]), case[1])
+
+
+    def test_get_kot_time(self):
+        test = [
+            [datetime.datetime.strptime('2022/01/01/10/50/00', '%Y/%m/%d/%H/%M/%S'), '2022-01-01T10:50:00+09:00'],
+            [datetime.datetime.strptime('2016/05/10/10/00/00', '%Y/%m/%d/%H/%M/%S'), '2016-05-10T10:00:00+09:00'],
+        ]
+
+        for case in test:
+            us = UtilityService()
+            self.assertEqual(us.get_kot_time(case[0]), case[1])
+
+
+    def test_get_kot_date(self):
+        test = [
+            [datetime.datetime.strptime('2022/01/01/10/50/00', '%Y/%m/%d/%H/%M/%S'), '2022-01-01'],
+            [datetime.datetime.strptime('2016/05/01/10/50/00', '%Y/%m/%d/%H/%M/%S'), '2016-05-01'],
+        ]
+
+        for case in test:
+            us = UtilityService()
+            self.assertEqual(us.get_kot_date(case[0]), case[1])
+
 
 if __name__ == "__main__":
     unittest.main()

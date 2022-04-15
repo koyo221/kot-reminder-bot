@@ -20,7 +20,7 @@ class SpreadSheetService:
     # ローカル用の処理を整備する（いまはcredsを切り変える）
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(client, scope)
-    # credentials = ServiceAccountCredentials.from_json_keyfile_name('../client_secret.json', scope)
+    # credentials = ServiceAccountCredentials.from_json_keyfile_name('./client_secret.json', scope)
     gs = gspread.authorize(credentials)
     sheets = gs.open("kot_reminder_bot")
 
@@ -43,3 +43,7 @@ class SpreadSheetService:
         """打刻回数をリセットする
         """
         SpreadSheetService.sheets.sheet1.update('H2:H500', [[0]]*499)
+
+    def get_ek_from_user_id(self, user_id: str):
+        cell = self.find(user_id)
+        return self.get_cell(cell.row, cell.col + 4)

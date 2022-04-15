@@ -1,11 +1,16 @@
-from SpreadSheetService import SpreadSheetService
-import requests
+import requests, sys
+
+from .SpreadSheetService import SpreadSheetService
+
+sys.path.append('..')
+from services.UtilityService import UtilityService
 
 class StampingRepository:
 
     def __init__(self, id) -> None:
         self.id = id
         self.sss = SpreadSheetService()
+        self.us = UtilityService()
 
 
     def stamp(self):
@@ -30,19 +35,21 @@ class StampingRepository:
         return int(self.sss.get_cell(cell_id.row, cell_id.col + 7).value)
 
 
-    #TODO ここにあるべき処理ではないのかもしれない…………………………
+    # #TODO ここにあるべき処理ではないのかもしれない…………………………
     def execute_kot_api(self, ec):
-        url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{ec}"
-        proxies = ''
-        access_token = ''
-        headers = {
-            'Authorization': f"Bearer {access_token}",
-            'content-type': "application/json",
-        }
+        pass
+    #     url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{ec}"
+    #     proxies = ''
+    #     access_token = ''
+    #     headers = {
+    #         'Authorization': f"Bearer {access_token}",
+    #         'content-type': "application/json",
+    #     }
 
-        payload = {
-            'date': '',
-            'time': ''
-        }
+    #     dt = self.us.get_date()
+    #     payload = {
+    #         'date': self.us.get_kot_time(dt),
+    #         'time': self.us.get_kot_date(dt)
+    #     }
 
-        response = requests.post(url, headers=headers, data=payload, proxies=proxies)
+    #     response = requests.post(url, headers=headers, data=payload, proxies=proxies)

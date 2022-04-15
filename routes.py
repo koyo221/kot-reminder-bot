@@ -1,15 +1,17 @@
 from flask import abort, request
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import (ButtonsTemplate, ConfirmTemplate, MessageAction,
+                            MessageEvent, PostbackAction, TemplateSendMessage,
+                            TextMessage, TextSendMessage)
 
 from app import app
-from repositories.WorkTimeRepository import WorkTimeRepository
-from repositories.EmployeeCodeRepository import EmployeeCodeRepository
-from services.LineService import LineService
-from services.MessageService import MessageService
-from services.MatcherService import MatcherService
-
 from constants import *
+from repositories.EmployeeCodeRepository import EmployeeCodeRepository
+from repositories.WorkTimeRepository import WorkTimeRepository
+from services.KingOfTimeService import KingOfTimeService
+from services.LineService import LineService
+from services.MatcherService import MatcherService
+from services.MessageService import MessageService
 
 #NOTE 処理をここにそのまま書くのってかなり変だけど、@handler.add周辺の処理が謎だしルートも実質1つなので一旦このままにする(Controllerクラスを作成するほどでもない)
 
@@ -65,9 +67,10 @@ def handle_message(event):
     stamping = matcher_service.match(RequestConst)
     if stamping == 'REQUEST_STAMPING':
         try:
-            pass
+            kot_service = KingOfTimeService()
+            kot_service.stamp(event.source.user_id)
         except:
-            reply = ErrorConst['GENERAL_ERROR']
+            reply = ErrorConst['STAMPING_ERROR']
 
 
     line_bot_api.reply_message(
@@ -79,4 +82,38 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
+    # btm = TemplateSendMessage(
+    #     template=ButtonsTemplate(
+    #         text='打刻催促テスト',
+    #         title='Menu',
+    #         actions=[MessageAction(text='残業', label='msg')]
+    #     )
+    # )
+
+
+
+    # buttons_template_message = TemplateSendMessage(
+
+    # a = TextSendMessage(text='reply')
+
+    # confirm_template_message = TemplateSendMessage(
+    #     alt_text='Confirm template',
+    #     template=ConfirmTemplate(
+    #         text='Are you sure?',
+    #         actions=[
+    #             PostbackAction(
+    #                 label='postback',
+    #                 display_text='postback text',
+    #                 data='action=buy&itemid=1'
+    #             ),
+    #             MessageAction(
+    #                 label='message',
+    #                 text='message text'
+    #             )
+    #         ]
+    #     )
+    # )
+
+
+    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage('yo'))
     return 'hi'
