@@ -82,38 +82,13 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    # btm = TemplateSendMessage(
-    #     template=ButtonsTemplate(
-    #         text='打刻催促テスト',
-    #         title='Menu',
-    #         actions=[MessageAction(text='残業', label='msg')]
-    #     )
-    # )
+    btm = TemplateSendMessage(
+        template=ButtonsTemplate(
+            text='打刻催促テスト',
+            title='Menu',
+            actions=[MessageAction(text='残業', label='msg')]
+        )
+    )
 
-
-
-    # buttons_template_message = TemplateSendMessage(
-
-    # a = TextSendMessage(text='reply')
-
-    # confirm_template_message = TemplateSendMessage(
-    #     alt_text='Confirm template',
-    #     template=ConfirmTemplate(
-    #         text='Are you sure?',
-    #         actions=[
-    #             PostbackAction(
-    #                 label='postback',
-    #                 display_text='postback text',
-    #                 data='action=buy&itemid=1'
-    #             ),
-    #             MessageAction(
-    #                 label='message',
-    #                 text='message text'
-    #             )
-    #         ]
-    #     )
-    # )
-
-
-    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage('yo'))
+    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', btm)
     return 'hi'
