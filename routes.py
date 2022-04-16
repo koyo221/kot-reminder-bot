@@ -2,7 +2,7 @@ from flask import abort, request
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ButtonsTemplate, ConfirmTemplate, MessageAction,
                             MessageEvent, PostbackAction, TemplateSendMessage,
-                            TextMessage, TextSendMessage)
+                            TextMessage, TextSendMessage, QuickReplyButton)
 
 from app import app
 from constants import *
@@ -82,14 +82,18 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    btm = TemplateSendMessage(
-        alt_text='alt',
-        template=ButtonsTemplate(
-            text='打刻催促テスト',
-            title='Menu',
-            actions=[MessageAction(text='残業', label='msg')]
-        )
+    # btm = TemplateSendMessage(
+    #     alt_text='alt',
+    #     template=ButtonsTemplate(
+    #         text='打刻催促テスト',
+    #         title='Menu',
+    #         actions=[MessageAction(text='残業', label='msg')]
+    #     )
+    # )
+
+    qr = QuickReplyButton(
+        action=MessageAction(text='残業', label='msg')
     )
 
-    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', btm)
+    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage(text='hi', quick_reply=qr))
     return 'hi'
