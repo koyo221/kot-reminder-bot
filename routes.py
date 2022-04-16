@@ -72,10 +72,10 @@ def handle_message(event):
     stamping = matcher_service.match(RequestConst)
     if stamping == 'REQUEST_STAMPING':
         try:
-            kot_service = KingOfTimeService()
-            response = kot_service.stamp(event.source.user_id)
-            if response == 'NO_EMPLOYEE_KEY_ERROR':
-                reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
+            # kot_service = KingOfTimeService()
+            # response = kot_service.stamp(event.source.user_id)
+            # if response == 'NO_EMPLOYEE_KEY_ERROR':
+            reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
         except:
             reply = ErrorConst['STAMPING_ERROR']
 
@@ -89,5 +89,4 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    ek = SpreadSheetService().get_ek_from_user_id('U0fe4c65c75dcbffc15ae1b249ed1c8f3')
-    return ek.value
+    return MatcherService('打刻').match(RequestConst)
