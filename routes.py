@@ -73,7 +73,7 @@ def handle_message(event):
         try:
             kot_service = KingOfTimeService()
             response = kot_service.stamp(event.source.user_id)
-            if response == 'NO_EK':
+            if response == 'NO_EMPLOYEE_KEY_ERROR':
                 reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
         except:
             reply = ErrorConst['STAMPING_ERROR']
