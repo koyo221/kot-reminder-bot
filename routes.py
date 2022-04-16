@@ -91,4 +91,4 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    return MatcherService('打刻').match(RequestConst)
+    return 'hi'

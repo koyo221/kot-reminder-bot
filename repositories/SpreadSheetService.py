@@ -20,30 +20,38 @@ class SpreadSheetService:
     # ローカル用の処理を整備する（いまはcredsを切り変える）
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(client, scope)
-    # credentials = ServiceAccountCredentials.from_json_keyfile_name('./client_secret.json', scope)
+    # credentials = ServiceAccountCredentials.from_json_keyfile_name('../client_secret.json', scope)
     gs = gspread.authorize(credentials)
     sheets = gs.open("kot_reminder_bot")
+
 
     def get_all(self):
         return SpreadSheetService.sheets.sheet1.get()
 
+
     def find(self, str):
         return SpreadSheetService.sheets.sheet1.find(str)
+
 
     def get_cell(self, row, col):
         return SpreadSheetService.sheets.sheet1.cell(row, col)
 
+
     def update_cell(self, row, col, val):
         SpreadSheetService.sheets.sheet1.update_cell(row, col, val)
+
 
     def append_row(self, value):
         SpreadSheetService.sheets.sheet1.append_row(value)
 
+
     def reset_stamping_count(self):
         """打刻回数をリセットする
         """
-        SpreadSheetService.sheets.sheet1.update('H2:H500', [[0]]*499)
+        length = len(self.get_all())
+        SpreadSheetService.sheets.sheet1.update(f"H2:H{length}", [[0]]*(length - 1))
+
 
     def get_ek_from_user_id(self, user_id: str):
         cell = self.find(user_id)
-        return self.get_cell(cell.row, cell.col + 4)
+        return self.get_cell(cell.row, cell.col + 4).value
