@@ -7,6 +7,7 @@ from linebot.models import (ButtonsTemplate, ConfirmTemplate, MessageAction,
 from app import app
 from constants import *
 from repositories.EmployeeCodeRepository import EmployeeCodeRepository
+from repositories.SpreadSheetService import SpreadSheetService
 from repositories.WorkTimeRepository import WorkTimeRepository
 from services.KingOfTimeService import KingOfTimeService
 from services.LineService import LineService
@@ -88,9 +89,5 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    qr = QuickReply(items=[QuickReplyButton(
-        action=MessageAction(text='残業', label='msg')
-    )])
-
-    line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage(text='hi', quick_reply=qr))
-    return 'hi'
+    ek = SpreadSheetService().get_ek_from_user_id('U0fe4c65c75dcbffc15ae1b249ed1c8f3')
+    return ek

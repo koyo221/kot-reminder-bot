@@ -30,10 +30,10 @@ class KingOfTimeService:
         """
         employee_key = self.ss.get_ek_from_user_id(user_id)
 
-        if employee_key.value == '':
+        if employee_key is None:
             return 'NO_EMPLOYEE_KEY_ERROR'
 
-        url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key}"
+        url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key.value}"
         dt = self.us.get_date()
 
         payload = {
