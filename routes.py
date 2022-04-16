@@ -90,4 +90,4 @@ def handle_message(event):
 @app.route("/hi")
 def hello():
     ek = SpreadSheetService().get_ek_from_user_id('U0fe4c65c75dcbffc15ae1b249ed1c8f3')
-    return ek
+    return ek.value
