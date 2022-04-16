@@ -1,5 +1,5 @@
 from constants import *
-from linebot.models import TextSendMessage
+from linebot.models import TextSendMessage, QuickReply, QuickReplyButton, MessageAction
 from repositories.SpreadSheetService import SpreadSheetService
 
 from .LineService import LineService
@@ -30,6 +30,10 @@ class BatchService:
 
         sheet = self.sheet_service.get_all()
 
+        quick_reply = QuickReply(items=[
+            QuickReplyButton(action=MessageAction(text='打刻', label='打刻を行う'))
+            ])
+
         for i, row in enumerate(sheet):
             if (i == 0):
                 continue
@@ -38,8 +42,9 @@ class BatchService:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_ATTENDANCE'],
                         ResponseConst['RESPONSE_ATTENDANCE_SPECIAL'])
-                    #TODO この処理ってLineServiceの役割
-                    LineService.line_bot_api.push_message(row[0], TextSendMessage(text=push))
+                    LineService.line_bot_api.push_message(
+                        row[0],
+                        TextSendMessage(text=push, quick_reply=quick_reply))
                 except:
                     print(f"batch failed for user {row[0]}")
             if self.util_service.is_ten_minutes_after(dt, row[2]):
@@ -47,6 +52,8 @@ class BatchService:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_LEAVE'],
                         ResponseConst['RESPONSE_LEAVE_SPECIAL'])
-                    LineService.line_bot_api.push_message(row[0], TextSendMessage(text=push))
+                    LineService.line_bot_api.push_message(
+                        row[0],
+                        TextSendMessage(text=push, quick_reply=quick_reply))
                 except:
                     print(f"batch failed for user {row[0]}")

@@ -91,7 +91,6 @@ class MessageService:
         Returns:
             str: レスポンスメッセージ
         """
-        print(key)
         if key == 'REQUEST_ARTICLES':
             return random.choice(ResponseConst['RESPONSE_ARTICLES'])
 

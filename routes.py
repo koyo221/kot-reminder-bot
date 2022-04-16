@@ -1,13 +1,10 @@
 from flask import abort, request
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (ButtonsTemplate, ConfirmTemplate, MessageAction,
-                            MessageEvent, PostbackAction, TemplateSendMessage,
-                            TextMessage, TextSendMessage, QuickReplyButton, QuickReply)
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from app import app
 from constants import *
 from repositories.EmployeeCodeRepository import EmployeeCodeRepository
-from repositories.SpreadSheetService import SpreadSheetService
 from repositories.WorkTimeRepository import WorkTimeRepository
 from services.KingOfTimeService import KingOfTimeService
 from services.LineService import LineService
@@ -77,7 +74,7 @@ def handle_message(event):
             if response == 'NO_EMPLOYEE_KEY_ERROR':
                 reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
             if response == 'REQUEST_FAILED':
-                reply = 'bad'
+                reply = ErrorConst['STAMPING_ERROR']
         except:
             reply = ErrorConst['STAMPING_ERROR']
 
