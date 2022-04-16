@@ -47,6 +47,8 @@ def handle_message(event):
 
     #TODO かなりいまいちな処理, どうするのが適切かは謎
     # どこかでリプライの種類を保持するようにすればいいのかも
+
+    # 労働時間登録
     work_time = matcher_service.is_valid_worktime()
     if type(work_time) is list:
         work_time_repo = WorkTimeRepository(event.source.user_id, work_time)
@@ -56,6 +58,7 @@ def handle_message(event):
         except:
             reply = ErrorConst['GENERAL_ERROR']
 
+    # 従業員コード登録
     employee_code = matcher_service.is_employee_code()
     if employee_code:
         ec_service = EmployeeCodeRepository(event.source.user_id, employee_code)
@@ -64,11 +67,14 @@ def handle_message(event):
         except:
             reply = ErrorConst['GENERAL_ERROR']
 
+    # 打刻
     stamping = matcher_service.match(RequestConst)
     if stamping == 'REQUEST_STAMPING':
         try:
             kot_service = KingOfTimeService()
-            kot_service.stamp(event.source.user_id)
+            response = kot_service.stamp(event.source.user_id)
+            if response == 'NO_EK':
+                reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
         except:
             reply = ErrorConst['STAMPING_ERROR']
 
@@ -82,15 +88,6 @@ def handle_message(event):
 # for testing
 @app.route("/hi")
 def hello():
-    # btm = TemplateSendMessage(
-    #     alt_text='alt',
-    #     template=ButtonsTemplate(
-    #         text='打刻催促テスト',
-    #         title='Menu',
-    #         actions=[MessageAction(text='残業', label='msg')]
-    #     )
-    # )
-
     qr = QuickReply(items=[QuickReplyButton(
         action=MessageAction(text='残業', label='msg')
     )])

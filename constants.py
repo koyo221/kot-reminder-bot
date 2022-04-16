@@ -163,5 +163,6 @@ ResponseConst = {
 
 ErrorConst = {
     'GENERAL_ERROR' : "エラーが発生しました。時間をおいて再度試して下さい。",
-    'STAMPING_ERROR': '打刻処理に失敗しました。\nKING OF TIMEアプリを確認して下さい。'
+    'STAMPING_ERROR': '打刻処理に失敗しました。\nKING OF TIMEアプリを確認して下さい。',
+    'NO_EMPLOYEE_KEY_ERROR': '従業員コードが登録されていないか、管理者に承認されていません。',
 }
