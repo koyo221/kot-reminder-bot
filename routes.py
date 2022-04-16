@@ -2,7 +2,7 @@ from flask import abort, request
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ButtonsTemplate, ConfirmTemplate, MessageAction,
                             MessageEvent, PostbackAction, TemplateSendMessage,
-                            TextMessage, TextSendMessage, QuickReplyButton)
+                            TextMessage, TextSendMessage, QuickReplyButton, QuickReply)
 
 from app import app
 from constants import *
@@ -91,9 +91,9 @@ def hello():
     #     )
     # )
 
-    qr = [QuickReplyButton(
+    qr = QuickReply(items=[QuickReplyButton(
         action=MessageAction(text='残業', label='msg')
-    )]
+    )])
 
     line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage(text='hi', quick_reply=qr))
     return 'hi'
