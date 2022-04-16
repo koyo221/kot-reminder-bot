@@ -72,10 +72,12 @@ def handle_message(event):
     stamping = matcher_service.match(RequestConst)
     if stamping == 'REQUEST_STAMPING':
         try:
-            # kot_service = KingOfTimeService()
-            # response = kot_service.stamp(event.source.user_id)
-            # if response == 'NO_EMPLOYEE_KEY_ERROR':
-            reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
+            kot_service = KingOfTimeService()
+            response = kot_service.stamp(event.source.user_id)
+            if response == 'NO_EMPLOYEE_KEY_ERROR':
+                reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
+            if response == 'REQUEST_FAILED':
+                reply = 'bad'
         except:
             reply = ErrorConst['STAMPING_ERROR']
 

@@ -41,12 +41,15 @@ class KingOfTimeService:
             'date': self.us.get_kot_date(dt)
         }
 
-        response = requests.post(
-            url=url,
-            headers=KingOfTimeService.headers,
-            data=payload,
-            proxies=KingOfTimeService.proxies,
-            timeout=10)
+        try:
+            response = requests.post(
+                url=url,
+                headers=KingOfTimeService.headers,
+                data=payload,
+                proxies=KingOfTimeService.proxies,
+                timeout=10)
+        except:
+            return 'REQUEST_FAILED'
 
         return response
 
