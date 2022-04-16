@@ -91,9 +91,9 @@ def hello():
     #     )
     # )
 
-    qr = QuickReplyButton(
+    qr = [QuickReplyButton(
         action=MessageAction(text='残業', label='msg')
-    )
+    )]
 
     line_bot_api.push_message('U0fe4c65c75dcbffc15ae1b249ed1c8f3', TextSendMessage(text='hi', quick_reply=qr))
     return 'hi'
