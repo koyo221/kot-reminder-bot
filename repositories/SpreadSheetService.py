@@ -54,4 +54,6 @@ class SpreadSheetService:
 
     def get_ek_from_user_id(self, user_id: str):
         cell = self.find(user_id)
+        if cell is None:
+            return False
         return self.get_cell(cell.row, cell.col + 4).value
