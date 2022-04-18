@@ -99,7 +99,6 @@ RESPONCE_ATTENDANCE_SPECIAL = [
     "出勤申請をして、がんばろう",
     "たまには出勤申請しなくてもいいかもね",
     "パイナップルの花言葉: あなたは完全です",
-    "今日もバグを修正するぞ！！",
     "ひよこが出勤申請時刻をお知らせします",
     "アテンドです",
     "出勤申請しな……",
@@ -118,10 +117,7 @@ RESPONCE_LEAVE_SPECIAL = [
 ]
 
 RESPONSE_STAMPING = [
-    # '打刻や〜',
-    # '打刻のオタク',
-    # '打刻ぴよ',
-    '打刻機能は現在開発中です。',
+    '打刻完了やで〜',
 ]
 
 RESPONSE_NO_MATCH = [
@@ -156,7 +152,7 @@ ResponseConst = {
     'RESPONSE_ATTENDANCE_SPECIAL': RESPONCE_ATTENDANCE_SPECIAL,
     'RESPONSE_LEAVE'             : "退勤申請を行ってください。",
     'RESPONSE_LEAVE_SPECIAL'     : RESPONCE_LEAVE_SPECIAL,
-    'RESPONSE_STAMPING'          : '打刻機能は現在開発中です。',
+    'RESPONSE_STAMPING'          : '打刻を行いました。',
     'RESPONSE_STAMPING_SPECIAL'  : RESPONSE_STAMPING,
     'RESPONSE_OVERWORK'          : RESPONSE_OVERWORK,
     'RESPONSE_NO_MATCH'          : RESPONSE_NO_MATCH

@@ -54,7 +54,7 @@ class KingOfTimeService:
                 timeout=10)
         except:
             return 'REQUEST_FAILED'
-
+        print(response.status_code)
         return response
 
 
