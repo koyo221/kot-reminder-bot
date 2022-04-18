@@ -32,7 +32,7 @@ class KingOfTimeService:
         if not employee_key:
             return 'NO_EMPLOYEE_KEY_ERROR'
 
-        url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key.value}"
+        url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key}"
         dt = self.us.get_date()
 
         payload = {
