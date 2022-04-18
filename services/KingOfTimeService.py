@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 from .UtilityService import UtilityService
 from repositories.SpreadSheetService import SpreadSheetService
 
@@ -46,15 +47,15 @@ class KingOfTimeService:
         dt = self.us.get_date()
 
         payload = {
-            'time': self.us.get_kot_time(dt),
-            'date': self.us.get_kot_date(dt)
+            "date": self.us.get_kot_date(dt),
+            "time": self.us.get_kot_time(dt),
         }
 
         try:
             response = requests.post(
                 url=url,
                 headers=KingOfTimeService.headers,
-                data=payload,
+                data=json.dumps(payload),
                 proxies=KingOfTimeService.proxies)
         except:
             return 'REQUEST_FAILED'
