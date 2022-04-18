@@ -13,10 +13,18 @@ from repositories.SpreadSheetService import SpreadSheetService
 # 17:30～18:30
 
 employee_code = sys.argv[1]
+fixie = os.environ.get('FIXIE_URL', '')
+access_token = os.environ.get('KOT_ACCESS_TOKEN', '')
+
+os.environ['http_proxy'] = fixie
+os.environ['https_proxy'] = fixie
 
 url = f'https://api.kingtime.jp/v1.0/employees/{employee_code}'
-access_token = os.environ.get('KOT_ACCESS_TOKEN', '')
-proxies = os.environ.get('FIXIE_URL', '')
+
+proxies = {
+    "http": fixie,
+    "https": fixie
+}
 headers = {
     'Authorization': f"Bearer {access_token}",
     'content-type': "application/json",
