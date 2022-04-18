@@ -2,6 +2,7 @@ import requests
 import os
 from .UtilityService import UtilityService
 from repositories.SpreadSheetService import SpreadSheetService
+from repositories.StampingRepository import StampingRepository
 
 class KingOfTimeService:
     fixie = os.environ.get('FIXIE_URL', '')
@@ -18,7 +19,7 @@ class KingOfTimeService:
 
     def __init__(self) -> None:
         self.us = UtilityService()
-        self.ss = SpreadSheetService()
+        self.sss = SpreadSheetService()
 
 
     def stamp(self, user_id):
@@ -32,7 +33,11 @@ class KingOfTimeService:
         Returns:
             requests.Response: レスポンス
         """
-        employee_key = self.ss.get_ek_from_user_id(user_id)
+
+        count = self.add_stamping_count(user_id)
+        if count == False:
+            return 'ALREADY_STAMPED_ERROR'
+        employee_key = self.sss.get_ek_from_user_id(user_id)
 
         if not employee_key:
             return 'NO_EMPLOYEE_KEY_ERROR'
@@ -54,9 +59,20 @@ class KingOfTimeService:
                 timeout=10)
         except:
             return 'REQUEST_FAILED'
-        print(response.status_code)
+
         return response
 
+    def add_stamping_count(self, user_id):
+        cell_id = self.sss.find(user_id)
+        stamping_count = self.get_stamping_count(cell_id)
+        if stamping_count >= 2:
+            return False
+        self.update_stamping_count(cell_id, stamping_count)
 
-    def get_employee_code(self):
-        pass
+
+    def get_stamping_count(self, cell_id):
+        return int(self.sss.get_cell(cell_id.row, cell_id.col + 7).value)
+
+
+    def update_stamping_count(self, cell_id, stamping_count):
+        self.sss.update_cell(cell_id.row, cell_id.col + 7, stamping_count + 1)

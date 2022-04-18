@@ -75,6 +75,8 @@ def handle_message(event):
                 reply = ErrorConst['NO_EMPLOYEE_KEY_ERROR']
             if response == 'REQUEST_FAILED':
                 reply = ErrorConst['STAMPING_ERROR']
+            if response == 'ALREADY_STAMPED_ERROR':
+                reply = ErrorConst['ALREADY_STAMPED_ERROR']
         except:
             reply = ErrorConst['STAMPING_ERROR']
 
