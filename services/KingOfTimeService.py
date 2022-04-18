@@ -2,7 +2,6 @@ import requests
 import os
 from .UtilityService import UtilityService
 from repositories.SpreadSheetService import SpreadSheetService
-from repositories.StampingRepository import StampingRepository
 
 class KingOfTimeService:
     fixie = os.environ.get('FIXIE_URL', '')
