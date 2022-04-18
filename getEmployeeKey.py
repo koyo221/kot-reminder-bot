@@ -32,7 +32,7 @@ headers = {
 
 response = requests.get(url, headers=headers, proxies=proxies).json()
 key = response['key']
-name = f"{response['first_name']}{response['last_name']}"
+name = f"{response['firstName']}{response['lastName']}"
 
 sss = SpreadSheetService()
 cell = sss.find(employee_code)
