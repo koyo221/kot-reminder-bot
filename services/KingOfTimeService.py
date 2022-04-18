@@ -1,10 +1,15 @@
 import requests
+import os
 from .UtilityService import UtilityService
 from repositories.SpreadSheetService import SpreadSheetService
 
 class KingOfTimeService:
-    proxies = ''
-    access_token = ''
+    fixie = os.environ.get('FIXIE_URL', '')
+    access_token = os.environ.get('KOT_ACCESS_TOKEN', '')
+    proxies = {
+        "http": fixie,
+        "https": fixie
+    }
     headers = {
         'Authorization': f"Bearer {access_token}",
         'content-type': "application/json",

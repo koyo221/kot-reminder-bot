@@ -12,6 +12,8 @@ from repositories.SpreadSheetService import SpreadSheetService
 #
 # 17:30～18:30
 
+
+# もろもろKoTServiceに移す
 employee_code = sys.argv[1]
 fixie = os.environ.get('FIXIE_URL', '')
 access_token = os.environ.get('KOT_ACCESS_TOKEN', '')
@@ -32,7 +34,7 @@ headers = {
 
 response = requests.get(url, headers=headers, proxies=proxies).json()
 key = response['key']
-name = f"{response['firstName']}{response['lastName']}"
+name = f"{response['lastName']}{response['firstName']}"
 
 sss = SpreadSheetService()
 cell = sss.find(employee_code)
