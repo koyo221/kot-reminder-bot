@@ -94,4 +94,4 @@ class UtilityService:
 
 
     def get_kot_time(self, dt: datetime.datetime):
-        return f'{dt.isoformat()}+09:00'
+        return f'{dt.isoformat()}'
