@@ -37,7 +37,7 @@ class BatchService:
         for i, row in enumerate(sheet):
             if (i == 0):
                 continue
-            if self.util_service.is_ten_minutes_before(dt, row[1]):
+            if self.util_service.is_ten_minutes_before(dt, row[1]) and (row[7] == '0'):
                 try:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_ATTENDANCE'],
@@ -47,7 +47,8 @@ class BatchService:
                         TextSendMessage(text=push, quick_reply=quick_reply))
                 except:
                     print(f"batch failed for user {row[0]}")
-            if self.util_service.is_ten_minutes_after(dt, row[2]):
+
+            if self.util_service.is_ten_minutes_after(dt, row[2]) and (row[7] == '1' or row[7] == '0'):
                 try:
                     push = self.message_service.is_special(
                         ResponseConst['RESPONSE_LEAVE'],
