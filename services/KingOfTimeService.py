@@ -45,9 +45,12 @@ class KingOfTimeService:
         url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key}"
         dt = self.us.get_date()
 
+        code = '1' if count == '0' else '2'
+
         payload = {
             "date": self.us.get_kot_date(dt),
             "time": self.us.get_kot_time(dt),
+            "code": code
         }
 
         try:
@@ -58,6 +61,8 @@ class KingOfTimeService:
                 proxies=KingOfTimeService.proxies)
         except:
             return 'REQUEST_FAILED'
+
+        print(payload)
         print(response.status_code)
 
         return response
@@ -68,6 +73,7 @@ class KingOfTimeService:
         if stamping_count >= 2:
             return False
         self.update_stamping_count(cell_id, stamping_count)
+        return stamping_count
 
 
     def get_stamping_count(self, cell_id):
