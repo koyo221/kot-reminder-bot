@@ -38,7 +38,6 @@ class KingOfTimeService:
         if count == False:
             return 'ALREADY_STAMPED_ERROR'
         employee_key = self.sss.get_ek_from_user_id(user_id)
-        print(employee_key)
 
         if not employee_key:
             return 'NO_EMPLOYEE_KEY_ERROR'
@@ -59,7 +58,6 @@ class KingOfTimeService:
                 proxies=KingOfTimeService.proxies)
         except:
             return 'REQUEST_FAILED'
-        print(payload)
         print(response.status_code)
 
         return response

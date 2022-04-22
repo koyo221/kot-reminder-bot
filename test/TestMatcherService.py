@@ -53,12 +53,14 @@ class TestMatcherService(unittest.TestCase):
         test = [
             ['aaaaa', False],
             ['従業員番号0000', '0000'],
-            ['従業員番号000', False],
-            ['従業員番号00000', False],
+            ['従業員番号000', '000'],
+            ['従業員番号00000', '00000'],
             ['0000', False],
             ['従業員0000', False],
             ['従業員番号1234', '1234'],
-            ['基本的人権9999', False]
+            ['基本的人権9999', False],
+            ['従業員番号00000a', False],
+            ['従業員番号', False],
         ]
 
         for case in test:

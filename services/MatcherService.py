@@ -56,6 +56,6 @@ class MatcherService:
 
 
     def is_employee_code(self):
-        if not re.fullmatch(r'従業員番号\d\d\d\d', self.message):
+        if not re.fullmatch(r'従業員番号\d+', self.message):
             return False
         return self.message[5:]
