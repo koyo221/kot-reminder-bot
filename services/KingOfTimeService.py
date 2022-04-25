@@ -45,12 +45,9 @@ class KingOfTimeService:
         url = f"https://api.kingtime.jp/v1.0/daily-workings/timerecord/{employee_key}"
         dt = self.us.get_date()
 
-        code = '1' if count == '0' else '2'
-
         payload = {
             "date": self.us.get_kot_date(dt),
-            "time": self.us.get_kot_time(dt),
-            "code": code
+            "time": self.us.get_kot_time(dt)
         }
 
         try:
