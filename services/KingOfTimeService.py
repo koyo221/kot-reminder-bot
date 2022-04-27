@@ -35,7 +35,7 @@ class KingOfTimeService:
         """
 
         count = self.add_stamping_count(user_id)
-        if count == False:
+        if count == 'TWO':
             return 'ALREADY_STAMPED_ERROR'
         employee_key = self.sss.get_ek_from_user_id(user_id)
 
@@ -68,9 +68,8 @@ class KingOfTimeService:
         cell_id = self.sss.find(user_id)
         stamping_count = self.get_stamping_count(cell_id)
         if stamping_count >= 2:
-            return False
+            return 'TWO'
         self.update_stamping_count(cell_id, stamping_count)
-        return stamping_count
 
 
     def get_stamping_count(self, cell_id):
